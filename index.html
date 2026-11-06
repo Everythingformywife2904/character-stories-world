@@ -6,243 +6,377 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta name="theme-color" content="#101014">
 
 <title>Character Stories World</title>
 
-<link rel="stylesheet" href="styles.css">
+<style>
+
+*{box-sizing:border-box}
+
+body{
+
+ margin:0;
+
+ background:#101014;
+
+ color:#f5f0ec;
+
+ font-family:Arial,sans-serif;
+
+}
+
+header{
+
+ background:#19151a;
+
+ padding:22px;
+
+ text-align:center;
+
+ border-bottom:1px solid #633b3b;
+
+}
+
+header h1{
+
+ color:#df7770;
+
+ font-family:Georgia,serif;
+
+ letter-spacing:2px;
+
+}
+
+nav{
+
+ display:flex;
+
+ justify-content:center;
+
+ flex-wrap:wrap;
+
+ gap:10px;
+
+}
+
+button,.button{
+
+ background:#b94d4b;
+
+ color:white;
+
+ border:0;
+
+ padding:12px 17px;
+
+ border-radius:6px;
+
+ cursor:pointer;
+
+ text-decoration:none;
+
+}
+
+button:hover,.button:hover{background:#e06c65}
+
+main{max-width:1100px;margin:auto;padding:22px}
+
+.hero{
+
+ text-align:center;
+
+ padding:65px 15px;
+
+ background:linear-gradient(135deg,#24171d,#101014);
+
+ border-radius:12px;
+
+}
+
+.hero h2{
+
+ font-family:Georgia,serif;
+
+ font-size:38px;
+
+ color:#e58b83;
+
+}
+
+section{margin:45px 0}
+
+h2,h3{color:#e58b83}
+
+input,textarea,select{
+
+ width:100%;
+
+ padding:13px;
+
+ margin:8px 0;
+
+ background:#201e24;
+
+ color:white;
+
+ border:1px solid #55434a;
+
+ border-radius:6px;
+
+}
+
+textarea{resize:vertical}
+
+.grid{
+
+ display:grid;
+
+ grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+ gap:15px;
+
+}
+
+.card,.panel{
+
+ background:#1d1b21;
+
+ padding:18px;
+
+ border:1px solid #49353b;
+
+ border-radius:9px;
+
+}
+
+.card h3{color:#e58b83}
+
+.tag{
+
+ color:#d87970;
+
+ font-size:12px;
+
+ text-transform:uppercase;
+
+ letter-spacing:1px;
+
+}
+
+.muted{color:#aaa;line-height:1.6}
+
+.hidden{display:none!important}
+
+.filters{
+
+ display:flex;
+
+ flex-wrap:wrap;
+
+ gap:8px;
+
+ margin:15px 0;
+
+}
+
+.filters button.active{background:#713b40}
+
+label{display:block;margin-top:12px}
+
+.panel{max-width:650px;margin:auto}
+
+#story-dialog{
+
+ background:#1d1b21;
+
+ color:white;
+
+ border:1px solid #75474c;
+
+ border-radius:12px;
+
+ padding:25px;
+
+ width:min(90%,650px);
+
+ max-height:85vh;
+
+ overflow:auto;
+
+}
+
+#story-dialog::backdrop{background:#000c}
+
+.close{
+
+ float:right;
+
+ background:transparent;
+
+ font-size:25px;
+
+ padding:3px 10px;
+
+}
+
+footer{
+
+ text-align:center;
+
+ padding:30px;
+
+ color:#888;
+
+}
+
+.character-image{
+
+ width:100%;
+
+ max-height:260px;
+
+ object-fit:cover;
+
+ border-radius:7px;
+
+ margin-top:10px;
+
+}
+
+.small{font-size:12px;color:#999}
+
+</style>
 
 </head>
 
 <body>
 
-<header class="top">
+<header>
 
-  <a class="brand" href="#">
+<h1>CHARACTER STORIES WORLD</h1>
 
-    CHARACTER <b>STORIES</b> WORLD
+<p>Every story has a past. Every character has a secret.</p>
 
-  </a>
+<nav>
 
-  <nav>
+<a href="#stories" class="button">Stories</a>
 
-    <a href="#stories">Stories</a>
+<a href="#characters" class="button">Characters</a>
 
-    <a href="#characters">Charaktere</a>
+<a href="#create" class="button">Create Character</a>
 
-    <a href="#create">Erstellen</a>
-
-  </nav>
+</nav>
 
 </header>
 
 <main>
 
-<section class="hero">
+<div class="hero">
 
-  <p class="eyebrow">30 GESCHICHTEN · DEINE FIGUREN · DEINE WELT</p>
+<p class="tag">30 STORIES · YOUR CHARACTERS · YOUR WORLD</p>
 
-  <h1>Jede Geschichte<br><i>hinterlässt Spuren.</i></h1>
+<h2>Jede Geschichte hinterlässt Spuren.</h2>
 
-  <p>
+<p>
 
-    Entdecke Horror und True Crime.
+Entdecke 15 Horror-Geschichten und 15 True-Crime-inspirierte Fälle.
 
-    Erschaffe eigene Geschichten und Charaktere
+Lies ihre Geschichten und erschaffe deine eigenen Charaktere.
 
-    mit einer einzigartigen Vergangenheit.
+</p>
 
-  </p>
+<a href="#stories" class="button">Geschichten entdecken</a>
 
-  <a class="button" href="#stories">Stories entdecken ↓</a>
+</div>
 
-</section>
+<section id="stories">
 
-<section id="stories" class="section">
+<h2>Die Geschichten</h2>
 
-  <div class="heading">
+<p class="muted">30 vorgegebene Geschichten. Du kannst sie lesen, aber nicht verändern.</p>
 
-    <div>
+<input id="search" placeholder="Geschichten suchen..." oninput="renderStories()">
 
-      <p class="eyebrow">BIBLIOTHEK</p>
+<div class="filters">
 
-      <h2>Stories entdecken</h2>
+<button class="active" onclick="setFilter('Alle',this)">Alle</button>
 
-    </div>
+<button onclick="setFilter('Horror',this)">Horror</button>
 
-    <span id="story-count">30 Stories</span>
+<button onclick="setFilter('True Crime',this)">True Crime</button>
 
-  </div>
+</div>
 
-  <input id="search" type="search" placeholder="Story suchen ...">
-
-  <div class="filters">
-
-    <button class="filter active" data-filter="Alle">Alle</button>
-
-    <button class="filter" data-filter="Horror">Horror</button>
-
-    <button class="filter" data-filter="True Crime">True Crime</button>
-
-    <button class="filter" data-filter="Eigene">Eigene Stories</button>
-
-  </div>
-
-  <div id="story-grid" class="grid"></div>
-
-  <p id="no-stories" class="muted hidden">
-
-    Keine passenden Stories gefunden.
-
-  </p>
+<div id="story-grid" class="grid"></div>
 
 </section>
 
-<section id="characters" class="section darker">
+<section id="characters">
 
-  <div class="heading">
+<h2>Deine Charaktere</h2>
 
-    <div>
+<p class="muted">Hier findest du alle Charaktere, die du erstellt hast.</p>
 
-      <p class="eyebrow">DEINE FIGUREN</p>
+<div id="character-grid" class="grid"></div>
 
-      <h2>Charaktere</h2>
-
-    </div>
-
-    <span id="character-count">0 Charaktere</span>
-
-  </div>
-
-  <p class="muted">
-
-    Deine Charaktere und Bilder werden in diesem Browser gespeichert.
-
-  </p>
-
-  <div id="character-grid" class="grid"></div>
-
-  <p id="no-characters" class="muted">
-
-    Noch keine Charaktere erstellt.
-
-  </p>
+<p id="empty-characters" class="muted">Du hast noch keine Charaktere erstellt.</p>
 
 </section>
 
-<section id="create" class="section">
+<section id="create">
 
-  <p class="eyebrow">WERDE SELBST ZUM AUTOR</p>
+<h2>Deinen Charakter erschaffen</h2>
 
-  <h2>Erstellen</h2>
+<p class="muted">
 
-  <div class="forms">
+Gib deinem Charakter einen Namen, eine Persönlichkeit,
 
-    <form id="story-form" class="panel">
+eine Vergangenheit und ein Aussehen.
 
-      <h3>Eigene Story erstellen</h3>
+</p>
 
-      <label>
+<form id="character-form" class="panel">
 
-        Titel
+<label>Name</label>
 
-        <input name="title" maxlength="70" required>
+<input name="name" maxlength="50" placeholder="Name deines Charakters" required>
 
-      </label>
+<label>Alter</label>
 
-      <label>
+<input name="age" type="number" min="1" max="120" placeholder="Alter">
 
-        Kategorie
+<label>Persönlichkeit</label>
 
-        <select name="category">
+<textarea name="personality" placeholder="Wie ist dein Charakter? Welche Eigenschaften hat er?" required></textarea>
 
-          <option>Horror</option>
+<label>Lebensgeschichte</label>
 
-          <option>True Crime</option>
+<textarea name="backstory" rows="6" placeholder="Was hat dein Charakter erlebt? Wie war seine Vergangenheit?" required></textarea>
 
-        </select>
+<label>Aussehen</label>
 
-      </label>
+<textarea name="appearance" placeholder="Beschreibe Haare, Augen, Kleidung und weitere Merkmale."></textarea>
 
-      <label>
+<label>Geschichte auswählen</label>
 
-        Beschreibung
+<select name="story" id="story-select">
 
-        <textarea name="description" minlength="20" rows="5" required></textarea>
+<option value="">Keine bestimmte Geschichte</option>
 
-      </label>
+</select>
 
-      <button class="button">Story speichern</button>
+<button type="submit">Charakter speichern</button>
 
-    </form>
+<p class="small">
 
-    <form id="character-form" class="panel">
+Die KI-Bilderstellung wird über eine sichere Serververbindung ergänzt.
 
-      <h3>Charakter erstellen</h3>
+</p>
 
-      <label>
-
-        Name
-
-        <input name="name" maxlength="50" required>
-
-      </label>
-
-      <label>
-
-        Alter
-
-        <input name="age" type="number" min="1" max="120">
-
-      </label>
-
-      <label>
-
-        Persönlichkeit
-
-        <input name="personality" maxlength="250"
-
-        placeholder="z. B. ruhig, aufmerksam, mutig" required>
-
-      </label>
-
-      <label>
-
-        Lebensgeschichte
-
-        <textarea name="backstory" minlength="20" rows="5" required></textarea>
-
-      </label>
-
-      <label>
-
-        Verknüpfte Story
-
-        <select name="story" id="story-select">
-
-          <option value="">Keine</option>
-
-        </select>
-
-      </label>
-
-      <button class="button" type="submit">
-
-        Charakter erstellen
-
-      </button>
-
-      <p class="small muted">
-
-        Anschließend kannst du ein KI-Bild deines Charakters erstellen.
-
-      </p>
-
-    </form>
-
-  </div>
+</form>
 
 </section>
 
@@ -250,33 +384,291 @@
 
 <dialog id="story-dialog">
 
-  <button class="close" aria-label="Schließen">×</button>
+<button class="close" onclick="closeStory()">×</button>
 
-  <p id="dialog-category" class="eyebrow"></p>
+<p id="dialog-category" class="tag"></p>
 
-  <h2 id="dialog-title"></h2>
+<h2 id="dialog-title"></h2>
 
-  <p id="dialog-description"></p>
+<p id="dialog-description"></p>
 
-  <button id="dialog-create" class="button">
-
-    Charakter zu dieser Story erstellen
-
-  </button>
+<button id="dialog-create">Charakter zu dieser Geschichte erstellen</button>
 
 </dialog>
 
-<div id="toast" role="status" aria-live="polite"></div>
-
 <footer>
 
-  CHARACTER STORIES WORLD · HORROR & TRUE CRIME
+CHARACTER STORIES WORLD · HORROR & TRUE CRIME
 
 </footer>
 
-<script src="stories.js"></script>
+<script>
 
-<script src="app.js"></script>
+const stories = [
 
-  </body>
+["Horror","The House at the End","Jede Nacht erscheint ein Licht in einem verlassenen Haus. Niemand weiß, wer dort lebt. Als eine junge Frau das Haus untersucht, entdeckt sie Hinweise auf eine längst vergessene Familie."],
+
+["Horror","The Baby Monitor","Ein Paar hört nachts Stimmen über ein Babyfon. Das Problem: Das Gerät ist ausgeschaltet und im Haus befindet sich niemand außer ihnen."],
+
+["Horror","Room 13","Ein Hotelgast erhält einen Schlüssel zu Zimmer 13. Doch laut den Bauplänen existiert dieses Zimmer überhaupt nicht."],
+
+["Horror","The Last Train","Ein Passagier steigt in den letzten Zug des Abends. An jeder Haltestelle verschwinden weitere Fahrgäste. Niemand erinnert sich daran, dass sie jemals eingestiegen sind."],
+
+["Horror","The Forest Answers","Eine Gruppe Wanderer hört ihre eigenen Stimmen aus dem Wald. Doch die Stimmen erzählen Dinge, die noch gar nicht passiert sind."],
+
+["Horror","Photographs of Tomorrow","Eine alte Kamera entwickelt Bilder von Ereignissen, die erst am nächsten Tag stattfinden. Eines der Bilder zeigt den Besitzer selbst."],
+
+["Horror","The Apartment Above","Jede Nacht hört eine Frau Schritte über ihrer Wohnung. Doch sie wohnt im obersten Stockwerk."],
+
+["Horror","When the Bells Stop","In einem kleinen Dorf hören plötzlich alle Kirchenglocken gleichzeitig auf zu läuten. Danach verschwinden mehrere Bewohner spurlos."],
+
+["Horror","The 3:17 Call","Jede Nacht um 3:17 Uhr klingelt dasselbe Telefon. Der unbekannte Anrufer kennt die geheimsten Erinnerungen seiner Besitzerin."],
+
+["Horror","The Reflection","Ein Teenager bemerkt, dass sein Spiegelbild manchmal andere Bewegungen macht als er selbst."],
+
+["Horror","The Forgotten Ward","Eine Patientin entdeckt in einem Krankenhaus einen Flur, der auf keinem Gebäudeplan eingezeichnet ist."],
+
+["Horror","Snow in July","Ein Dorf wird mitten im Sommer von schwarzem Schnee bedeckt. Die Bewohner beginnen, sich an Dinge zu erinnern, die sie nie erlebt haben."],
+
+["Horror","The Children's Room","Eine Familie entdeckt hinter einer Wand ein vollständig eingerichtetes Kinderzimmer. Auf dem Tisch liegen Fotos der Familie."],
+
+["Horror","The Night Guard","Ein Museumswärter bemerkt, dass sich die Personen auf einem alten Gemälde jede Nacht verändern."],
+
+["Horror","Nobody Was Home","Eine Familie kehrt nach einem Stromausfall nach Hause zurück. Alles sieht vertraut aus, aber jedes Familienmitglied behauptet, dass etwas anders ist."],
+
+["True Crime","The Lake Case","Nach einer Sommerparty verschwindet eine Person spurlos. Die Aussagen der Gäste widersprechen sich und ein wichtiges Detail fehlt."],
+
+["True Crime","The Missing Neighbor","Eine Frau verschwindet aus ihrer Wohnung. Ihre Nachbarn erzählen unterschiedliche Geschichten über die letzte Nacht, in der sie gesehen wurde."],
+
+["True Crime","One Alibi Too Many","Mehrere Zeugen geben bei einer Untersuchung exakt dasselbe Alibi ab. Ein Ermittler beginnt, die Aussagen genauer zu hinterfragen."],
+
+["True Crime","The Anonymous Message","Eine Zeitung erhält eine anonyme Nachricht über einen ungelösten Vermisstenfall. Der Absender behauptet, die Wahrheit zu kennen."],
+
+["True Crime","The Second Will","Nach dem Tod eines Geschäftsmannes taucht ein zweites Testament auf. Plötzlich behaupten mehrere Familienmitglieder, den Verstorbenen besser gekannt zu haben als alle anderen."],
+
+["True Crime","The Archive Files","Eine Archivarin entdeckt fehlende Akten zu einem alten Kriminalfall. Die wenigen vorhandenen Dokumente werfen neue Fragen auf."],
+
+["True Crime","The False Witness","Jahre nach einem Gerichtsverfahren ändert ein wichtiger Zeuge seine Aussage. Die Ermittlungen werden erneut aufgenommen."],
+
+["True Crime","The Last Transfer","Kurz vor dem Verschwinden einer Person wird eine ungewöhnliche Überweisung entdeckt. Niemand kann erklären, wer sie veranlasst hat."],
+
+["True Crime","The Empty Office","Eine Geschäftsfrau verschwindet aus ihrem Büro. Ihr Kalender enthält mehrere Termine mit Personen, die niemand kennt."],
+
+["True Crime","The Case Without Files","Ein Journalist entdeckt Hinweise auf eine Untersuchung, die offiziell nie stattgefunden haben soll."],
+
+["True Crime","Voices in Court","Während eines Gerichtsverfahrens widersprechen sich die Aussagen mehrerer Zeugen. Eine entscheidende Erinnerung verändert den gesamten Fall."],
+
+["True Crime","The Inheritance","Nach einer Erbschaft erzählen mehrere Menschen vollkommen unterschiedliche Geschichten über den Verstorbenen."],
+
+["True Crime","The Missing Courier","Ein Kurier verschwindet vor der Zustellung eines Pakets. Die Empfängerin behauptet, nichts bestellt zu haben."],
+
+["True Crime","A Village in Silence","Ein ungeklärter Vorfall spaltet ein kleines Dorf. Jahre später tauchen neue Hinweise auf."],
+
+["True Crime","The Name in the Guestbook","Ein altes Hotel-Gästebuch enthält einen Namen, der mit einem ungelösten Vermisstenfall verbunden ist."]
+
+].map((s,i)=>({
+
+id:i,
+
+category:s[0],
+
+title:s[1],
+
+description:s[2]
+
+}));
+
+let filter="Alle";
+
+let selectedStory=null;
+
+let characters=JSON.parse(
+
+localStorage.getItem("csw_characters")||"[]"
+
+);
+
+function escapeHTML(value){
+
+return String(value||"").replace(/[&<>"']/g,c=>({
+
+"&":"&amp;",
+
+"<":"&lt;",
+
+">":"&gt;",
+
+'"':"&quot;",
+
+"'":"&#39;"
+
+}[c]));
+
+}
+
+function setFilter(value,button){
+
+filter=value;
+
+document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+
+button.classList.add("active");
+
+renderStories();
+
+}
+
+function renderStories(){
+
+const term=document.getElementById("search").value.toLowerCase();
+
+const list=stories.filter(s=>
+
+(filter==="Alle"||s.category===filter)&&
+
+(s.title+" "+s.description).toLowerCase().includes(term)
+
+);
+
+document.getElementById("story-grid").innerHTML=list.map(s=>`
+
+<div class="card">
+
+<span class="tag">${s.category}</span>
+
+<h3>${escapeHTML(s.title)}</h3>
+
+<p>${escapeHTML(s.description.substring(0,115))}...</p>
+
+<button onclick="openStory(${s.id})">Geschichte lesen</button>
+
+</div>
+
+`).join("");
+
+document.getElementById("story-select").innerHTML=
+
+'<option value="">Keine bestimmte Geschichte</option>'+
+
+stories.map(s=>`
+
+<option value="${s.id}">${escapeHTML(s.title)}</option>
+
+`).join("");
+
+}
+
+function openStory(id){
+
+selectedStory=stories.find(s=>s.id===id);
+
+document.getElementById("dialog-category").textContent=selectedStory.category;
+
+document.getElementById("dialog-title").textContent=selectedStory.title;
+
+document.getElementById("dialog-description").textContent=selectedStory.description;
+
+document.getElementById("story-dialog").showModal();
+
+}
+
+function closeStory(){
+
+document.getElementById("story-dialog").close();
+
+}
+
+document.getElementById("dialog-create").onclick=()=>{
+
+if(selectedStory){
+
+document.getElementById("story-select").value=selectedStory.id;
+
+}
+
+closeStory();
+
+document.getElementById("create").scrollIntoView({behavior:"smooth"});
+
+};
+
+function renderCharacters(){
+
+const grid=document.getElementById("character-grid");
+
+grid.innerHTML=characters.map((c,i)=>`
+
+<div class="card">
+
+<span class="tag">CHARACTER</span>
+
+<h3>${escapeHTML(c.name)}</h3>
+
+<p><b>Alter:</b> ${escapeHTML(c.age||"Nicht angegeben")}</p>
+
+<p><b>Persönlichkeit:</b> ${escapeHTML(c.personality)}</p>
+
+<p><b>Lebensgeschichte:</b> ${escapeHTML(c.backstory)}</p>
+
+<p><b>Aussehen:</b> ${escapeHTML(c.appearance||"Nicht angegeben")}</p>
+
+<p class="small">Geschichte: ${escapeHTML(c.storyTitle||"Keine")}</p>
+
+<button onclick="deleteCharacter(${i})">Löschen</button>
+
+</div>
+
+`).join("");
+
+document.getElementById("empty-characters").classList.toggle("hidden",characters.length>0);
+
+}
+
+document.getElementById("character-form").onsubmit=e=>{
+
+e.preventDefault();
+
+const data=Object.fromEntries(new FormData(e.target));
+
+const linked=stories.find(s=>String(s.id)===data.story);
+
+characters.push({
+
+...data,
+
+storyTitle:linked?linked.title:""
+
+});
+
+localStorage.setItem("csw_characters",JSON.stringify(characters));
+
+e.target.reset();
+
+renderCharacters();
+
+alert("Dein Charakter wurde gespeichert!");
+
+document.getElementById("characters").scrollIntoView({behavior:"smooth"});
+
+};
+
+function deleteCharacter(i){
+
+if(!confirm("Möchtest du diesen Charakter wirklich löschen?"))return;
+
+characters.splice(i,1);
+
+localStorage.setItem("csw_characters",JSON.stringify(characters));
+
+renderCharacters();
+
+}
+
+renderStories();
+
+renderCharacters();
+
+</script>
+
+</body>
 </html>
