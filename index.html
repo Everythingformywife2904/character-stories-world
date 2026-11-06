@@ -1,1 +1,282 @@
-html
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#101014">
+
+<title>Character Stories World</title>
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header class="top">
+
+  <a class="brand" href="#">
+
+    CHARACTER <b>STORIES</b> WORLD
+
+  </a>
+
+  <nav>
+
+    <a href="#stories">Stories</a>
+
+    <a href="#characters">Charaktere</a>
+
+    <a href="#create">Erstellen</a>
+
+  </nav>
+
+</header>
+
+<main>
+
+<section class="hero">
+
+  <p class="eyebrow">30 GESCHICHTEN · DEINE FIGUREN · DEINE WELT</p>
+
+  <h1>Jede Geschichte<br><i>hinterlässt Spuren.</i></h1>
+
+  <p>
+
+    Entdecke Horror und True Crime.
+
+    Erschaffe eigene Geschichten und Charaktere
+
+    mit einer einzigartigen Vergangenheit.
+
+  </p>
+
+  <a class="button" href="#stories">Stories entdecken ↓</a>
+
+</section>
+
+<section id="stories" class="section">
+
+  <div class="heading">
+
+    <div>
+
+      <p class="eyebrow">BIBLIOTHEK</p>
+
+      <h2>Stories entdecken</h2>
+
+    </div>
+
+    <span id="story-count">30 Stories</span>
+
+  </div>
+
+  <input id="search" type="search" placeholder="Story suchen ...">
+
+  <div class="filters">
+
+    <button class="filter active" data-filter="Alle">Alle</button>
+
+    <button class="filter" data-filter="Horror">Horror</button>
+
+    <button class="filter" data-filter="True Crime">True Crime</button>
+
+    <button class="filter" data-filter="Eigene">Eigene Stories</button>
+
+  </div>
+
+  <div id="story-grid" class="grid"></div>
+
+  <p id="no-stories" class="muted hidden">
+
+    Keine passenden Stories gefunden.
+
+  </p>
+
+</section>
+
+<section id="characters" class="section darker">
+
+  <div class="heading">
+
+    <div>
+
+      <p class="eyebrow">DEINE FIGUREN</p>
+
+      <h2>Charaktere</h2>
+
+    </div>
+
+    <span id="character-count">0 Charaktere</span>
+
+  </div>
+
+  <p class="muted">
+
+    Deine Charaktere und Bilder werden in diesem Browser gespeichert.
+
+  </p>
+
+  <div id="character-grid" class="grid"></div>
+
+  <p id="no-characters" class="muted">
+
+    Noch keine Charaktere erstellt.
+
+  </p>
+
+</section>
+
+<section id="create" class="section">
+
+  <p class="eyebrow">WERDE SELBST ZUM AUTOR</p>
+
+  <h2>Erstellen</h2>
+
+  <div class="forms">
+
+    <form id="story-form" class="panel">
+
+      <h3>Eigene Story erstellen</h3>
+
+      <label>
+
+        Titel
+
+        <input name="title" maxlength="70" required>
+
+      </label>
+
+      <label>
+
+        Kategorie
+
+        <select name="category">
+
+          <option>Horror</option>
+
+          <option>True Crime</option>
+
+        </select>
+
+      </label>
+
+      <label>
+
+        Beschreibung
+
+        <textarea name="description" minlength="20" rows="5" required></textarea>
+
+      </label>
+
+      <button class="button">Story speichern</button>
+
+    </form>
+
+    <form id="character-form" class="panel">
+
+      <h3>Charakter erstellen</h3>
+
+      <label>
+
+        Name
+
+        <input name="name" maxlength="50" required>
+
+      </label>
+
+      <label>
+
+        Alter
+
+        <input name="age" type="number" min="1" max="120">
+
+      </label>
+
+      <label>
+
+        Persönlichkeit
+
+        <input name="personality" maxlength="250"
+
+        placeholder="z. B. ruhig, aufmerksam, mutig" required>
+
+      </label>
+
+      <label>
+
+        Lebensgeschichte
+
+        <textarea name="backstory" minlength="20" rows="5" required></textarea>
+
+      </label>
+
+      <label>
+
+        Verknüpfte Story
+
+        <select name="story" id="story-select">
+
+          <option value="">Keine</option>
+
+        </select>
+
+      </label>
+
+      <button class="button" type="submit">
+
+        Charakter erstellen
+
+      </button>
+
+      <p class="small muted">
+
+        Anschließend kannst du ein KI-Bild deines Charakters erstellen.
+
+      </p>
+
+    </form>
+
+  </div>
+
+</section>
+
+</main>
+
+<dialog id="story-dialog">
+
+  <button class="close" aria-label="Schließen">×</button>
+
+  <p id="dialog-category" class="eyebrow"></p>
+
+  <h2 id="dialog-title"></h2>
+
+  <p id="dialog-description"></p>
+
+  <button id="dialog-create" class="button">
+
+    Charakter zu dieser Story erstellen
+
+  </button>
+
+</dialog>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<footer>
+
+  CHARACTER STORIES WORLD · HORROR & TRUE CRIME
+
+</footer>
+
+<script src="stories.js"></script>
+
+<script src="app.js"></script>
+
+  </body>
+</html>
